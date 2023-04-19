@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec ts-node src/server.ts",
@@ -12,10 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
-    "aws-sdk": "^2.1360.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -23,28 +20,28 @@
     "express": "^4.18.2",
     "express-handlebars": "^7.0.4",
     "express-session": "^1.17.3",
-    "firebase": "^9.19.1",
-    "firebase-admin": "^11.5.0",
-    "firebase-functions": "^4.2.1",
-    "mock-aws-s3": "^4.0.2",
-    "nock": "^13.3.0",
+    "firebase": "^9.20.0",
+    "firebase-admin": "^11.7.0",
+    "firebase-functions": "^4.3.0",
     "passport": "^0.6.0",
     "passport-firebase": "^1.2.0",
     "passport-local": "^1.0.0",
-    "server.js": "^1.0.0"
+    "server.js": "^1.0.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
     "@types/express-handlebars": "^6.0.0",
     "@types/express-session": "^1.17.7",
     "@types/passport": "^1.0.12",
     "@types/passport-local": "^1.0.35",
-    "html-loader": "^4.2.0",
-    "nodemon": "^2.0.22",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "webpack": "^5.79.0",
     "webpack-cli": "^5.0.1",
     "webpack-node-externals": "^3.0.0"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

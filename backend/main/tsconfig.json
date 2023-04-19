@@ -13,6 +13,6 @@
     "skipLibCheck": true,
     "sourceMap": true,
 
-    "baseUrl": "src"
+    "baseUrl": "nodejs/src"
   }
 }

@@ -26,7 +26,7 @@ const config = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'server.js',
+    filename: 'index.js',
   },
 };
 

@@ -5,6 +5,7 @@ import passportlocal from 'passport-local';
 import { compare } from 'bcrypt';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import serverless from 'serverless-http';
 
 import {
   User,
@@ -200,6 +201,9 @@ app.patch('/user/updatePassword/:userId', async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  console.log('Server started successfully');
-});
+if (process.env.ENVIRONMENT === 'lambda') {
+  module.exports.handler = serverless(app);
+} else
+  app.listen(4000, () => {
+    console.log('Server started successfully');
+  });
