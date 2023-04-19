@@ -104,10 +104,12 @@ export const getAllPosts = (callback: (posts: any) => void) => {
   const db = getDatabase(dbapp);
   const postRef = ref(db, 'posts');
 
-  onValue(postRef, (snapshot) => {
+  const unsub = onValue(postRef, (snapshot) => {
     const posts = snapshot.val();
     callback(posts);
   });
+
+  unsub();
 };
 
 export const updatePostContent = async (

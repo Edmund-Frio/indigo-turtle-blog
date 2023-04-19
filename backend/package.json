@@ -30,7 +30,8 @@
     "nock": "^13.3.0",
     "passport": "^0.6.0",
     "passport-firebase": "^1.2.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "server.js": "^1.0.0"
   },
   "devDependencies": {
     "@types/express-handlebars": "^6.0.0",
