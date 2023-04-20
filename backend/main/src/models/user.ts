@@ -9,7 +9,7 @@ import {
   limitToFirst,
   equalTo,
 } from 'firebase/database';
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 import { dbapp } from '../firebase';
 
 export interface User {

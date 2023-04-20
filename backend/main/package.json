@@ -5,15 +5,14 @@
   "scripts": {
     "start": "nodemon --exec ts-node src/server.ts",
     "build": "webpack",
-    "start2": "node ./dist/server.js"
+    "start2": "node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -30,6 +29,7 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/express-handlebars": "^6.0.0",
     "@types/express-session": "^1.17.7",

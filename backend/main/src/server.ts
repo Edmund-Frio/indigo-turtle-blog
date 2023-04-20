@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import session, { SessionOptions } from 'express-session';
 import passport from 'passport';
 import passportlocal from 'passport-local';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import serverless from 'serverless-http';
