@@ -90,7 +90,7 @@ export const PostOverlay = ({
   ): void => {
     // TODO: Delete post from db and also remove it from the array of posts using uid.
     axios
-      .delete(`${SERVER_URL as string}/posts/${post.uid}`)
+      .delete(`${SERVER_URL}/posts/${post.uid}`)
       .catch((err) => console.error(err));
     setMoreOpen(false);
     setPopIsOpen(false);
@@ -116,7 +116,7 @@ export const PostOverlay = ({
     );
 
     axios
-      .patch(`${SERVER_URL as string}/posts/${post.uid}`, {
+      .patch(`${SERVER_URL}/posts/${post.uid}`, {
         username: post.author,
         content: contentRef.current,
       })
