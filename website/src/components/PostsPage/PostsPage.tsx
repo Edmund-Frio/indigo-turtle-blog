@@ -31,12 +31,12 @@ export function PostsPage({
   const postComps = useRef<HTMLDivElement[]>([]);
   const navigate = useNavigate();
 
+  const set = async (): Promise<void> => {
+    const posts = await fetchPosts();
+    setPosts(posts);
+  };
+
   useEffect(() => {
-    // This function will run when page is first initialized and when pageN is updated
-    const set = async (): Promise<void> => {
-      const posts = await fetchPosts();
-      setPosts(posts);
-    };
     set().catch((err) => console.log(err));
   }, [pageN]);
 
@@ -79,9 +79,11 @@ export function PostsPage({
           ''
         ) : (
           <PostOverlay
+            post={focusPost}
             popIsOpen={popIsOpen}
             setPopIsOpen={setPopIsOpen}
-            post={focusPost}
+            posts={posts}
+            setPosts={setPosts}
           />
         )}
       </Grid>

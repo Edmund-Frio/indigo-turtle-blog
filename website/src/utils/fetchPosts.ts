@@ -4,12 +4,10 @@ import { isPost } from './isPost';
 
 import * as posts from 'post-objects.json';
 import axios from 'axios';
+import { SERVER_URL } from 'utils/constants';
 
 export async function fetchPosts(): Promise<Post[]> {
-  // Placeholder for fetching posts from serverside
-  // fetch('http://localhost:4000/post');
-  const res = await axios.get('http://localhost:4000/posts');
-  // const json: unknown = posts;
+  const res = await axios.get(`${SERVER_URL}/posts`);
   const json: unknown = { posts: Object.values(res.data) };
 
   const schema = z.object({

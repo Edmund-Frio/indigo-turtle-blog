@@ -173,7 +173,6 @@ app.delete('/posts/:postId', async (req, res) => {
 // });
 
 app.get('/posts', async (req, res) => {
-  console.log('how many times?');
   const posts = await getAllPosts();
   res.send(posts);
 });
