@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider, Button, Grid } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { text } from 'stream/consumers';
+import { SERVER_URL } from 'utils/constants';
 
 interface Values {
   username: string;
@@ -51,7 +52,7 @@ export const RegisterForm = ({
   */
 
   const instance = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: SERVER_URL,
     withCredentials: true,
   });
 

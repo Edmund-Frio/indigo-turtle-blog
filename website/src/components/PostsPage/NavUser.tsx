@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Button, Grid, Typography, useTheme } from '@mui/material';
 import { NavigateFunction } from 'react-router-dom';
 import { myContext } from 'components/Context';
-import axios, { AxiosResponse } from 'axios';
 
 const handleMyPost = (
   username: string,

@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
-import Axios, { AxiosResponse } from 'axios';
+import React, { createContext, ReactNode } from 'react';
 
 // todo: context is working on accountpage but is not working in postspage, why is that the case.
 
