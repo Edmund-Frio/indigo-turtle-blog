@@ -6,6 +6,7 @@ import {
   get,
   update,
   remove,
+  set,
 } from 'firebase/database';
 import { dbapp } from '../firebase';
 
@@ -62,7 +63,6 @@ export const createPost = async (post: Post): Promise<void> => {
   };
 
   await update(newPostRef, newPost);
-
   //return newPost;
 };
 
@@ -107,9 +107,8 @@ export const getAllPosts = (callback: (posts: any) => void) => {
   const unsub = onValue(postRef, (snapshot) => {
     const posts = snapshot.val();
     callback(posts);
+    unsub();
   });
-
-  unsub();
 };
 
 export const updatePostContent = async (
