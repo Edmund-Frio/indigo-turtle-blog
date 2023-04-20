@@ -16,6 +16,8 @@ export async function fetchPosts(): Promise<Post[]> {
     posts: z.unknown().array(),
   });
 
+  console.log(new Date().getSeconds());
+
   const result = schema.safeParse(json);
   // FIXME: Kinda convoluted, might be a good idea to delete isPost and move everything to fetchPosts if no one else needs isPost
   if (result.success) {

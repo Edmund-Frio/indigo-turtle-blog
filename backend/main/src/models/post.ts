@@ -6,6 +6,7 @@ import {
   get,
   update,
   remove,
+  set,
 } from 'firebase/database';
 import { dbapp } from '../firebase';
 
@@ -62,7 +63,6 @@ export const createPost = async (post: Post): Promise<void> => {
   };
 
   await update(newPostRef, newPost);
-
   //return newPost;
 };
 
@@ -100,14 +100,22 @@ export const isUserAuthorized = (username: string, post: Post): boolean => {
   return post.author === username;
 };
 
-export const getAllPosts = (callback: (posts: any) => void) => {
+// export const getAllPosts = (callback: (posts: any) => void) => {
+//   const db = getDatabase(dbapp);
+//   const postRef = ref(db, 'posts');
+
+//   const unsub = onValue(postRef, (snapshot) => {
+//     const posts = snapshot.val();
+//     callback(posts);
+//     // unsub();
+//   });
+// };
+
+export const getAllPosts = async (): Promise<Post[]> => {
   const db = getDatabase(dbapp);
   const postRef = ref(db, 'posts');
-
-  onValue(postRef, (snapshot) => {
-    const posts = snapshot.val();
-    callback(posts);
-  });
+  const snapshot = (await get(postRef)).val();
+  return snapshot;
 };
 
 export const updatePostContent = async (

@@ -2,9 +2,10 @@ import express, { Request, Response } from 'express';
 import session, { SessionOptions } from 'express-session';
 import passport from 'passport';
 import passportlocal from 'passport-local';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import serverless from 'serverless-http';
 
 import {
   User,
@@ -164,10 +165,17 @@ app.delete('/posts/:postId', async (req, res) => {
   }
 });
 
-app.get('/posts', (req, res) => {
-  getAllPosts((posts) => {
-    res.send(posts);
-  });
+// app.get('/posts', (req, res) => {
+//   console.log('how many times?');
+//   getAllPosts((posts) => {
+//     res.send(posts);
+//   });
+// });
+
+app.get('/posts', async (req, res) => {
+  console.log('how many times?');
+  const posts = await getAllPosts();
+  res.send(posts);
 });
 
 app.patch('/posts/:postId', async (req, res) => {
@@ -200,6 +208,9 @@ app.patch('/user/updatePassword/:userId', async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  console.log('Server started successfully');
-});
+if (process.env.ENVIRONMENT === 'lambda') {
+  module.exports.handler = serverless(app);
+} else
+  app.listen(4000, () => {
+    console.log('Server started successfully');
+  });

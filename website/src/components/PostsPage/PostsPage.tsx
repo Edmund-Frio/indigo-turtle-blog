@@ -33,7 +33,10 @@ export function PostsPage({
 
   useEffect(() => {
     // This function will run when page is first initialized and when pageN is updated
-    const set = async (): Promise<void> => setPosts(await fetchPosts());
+    const set = async (): Promise<void> => {
+      const posts = await fetchPosts();
+      setPosts(posts);
+    };
     set().catch((err) => console.log(err));
   }, [pageN]);
 
