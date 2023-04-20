@@ -3,7 +3,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 const config = {
-  mode: 'development',
+  mode: 'none',
   target: 'node',
   entry: './src/server.ts',
   externals: [nodeExternals()],
@@ -27,7 +27,6 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    library: 'main',
     libraryTarget: 'commonjs',
   },
 };

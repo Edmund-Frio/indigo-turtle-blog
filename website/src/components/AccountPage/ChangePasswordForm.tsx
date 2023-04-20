@@ -5,6 +5,7 @@ import { Box, Button, Container, FilledInput, Input } from '@mui/material';
 import { Label } from '@mui/icons-material';
 import { myContext } from 'components/Context';
 import { useNavigate } from 'react-router';
+import { SERVER_URL } from 'utils/constants';
 
 const FORM_CONTAINER_STYLE = {
   paddingTop: '40px',
@@ -36,13 +37,10 @@ function ChangePasswordForm(): JSX.Element {
       setPasswordError('Passwords do not match');
     } else {
       axios
-        .patch(
-          `http://localhost:4000/user/updatePassword/${ctx.uid as string}`,
-          {
-            activeUser: ctx.username,
-            newPassword,
-          }
-        )
+        .patch(`${SERVER_URL}/user/updatePassword/${ctx.uid as string}`, {
+          activeUser: ctx.username,
+          newPassword,
+        })
         .then((response) => {
           setPasswordError('Password changed');
           setCurrentPassword('');

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Popup from './Popup';
+import { SERVER_URL } from 'utils/constants';
 
 function ProfilePictureForm(): JSX.Element {
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -25,7 +26,7 @@ function ProfilePictureForm(): JSX.Element {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     axios
-      .post('/changeProfilePicture', { selectedFile })
+      .post(`${SERVER_URL}/changeProfilePicture`, { selectedFile })
       .then((response) => {
         setFileError('Profile picture changed');
       })

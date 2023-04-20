@@ -14,6 +14,7 @@ import {
 import axios, { AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { myContext } from 'components/Context';
+import { SERVER_URL } from 'utils/constants';
 
 interface Values {
   username: string;
@@ -30,7 +31,7 @@ export const AuthForm = ({
   const ctx = useContext(myContext);
   const navigate = useNavigate();
   const instance = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: SERVER_URL,
     withCredentials: true,
   });
 

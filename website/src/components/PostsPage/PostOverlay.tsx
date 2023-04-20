@@ -11,10 +11,13 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import React, { CSSProperties, useContext, useState } from 'react';
+import React, { CSSProperties, useContext, useRef, useState } from 'react';
 import { dateToString } from 'utils/dateToString';
 import { createTags } from './createTags';
 import { myContext } from 'components/Context';
+import axios from 'axios';
+
+import { SERVER_URL } from 'utils/constants';
 
 const OVERLAY_STYLE: SxProps<Theme> = {
   position: 'absolute' as 'absolute',
@@ -59,10 +62,14 @@ export const PostOverlay = ({
   popIsOpen,
   setPopIsOpen,
   post,
+  posts,
+  setPosts,
 }: {
   popIsOpen: boolean;
   setPopIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   post: Post;
+  posts: Post[];
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
 }): JSX.Element => {
   const handleMoreClicked = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -82,7 +89,12 @@ export const PostOverlay = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     // TODO: Delete post from db and also remove it from the array of posts using uid.
+    axios
+      .delete(`${SERVER_URL as string}/posts/${post.uid}`)
+      .catch((err) => console.error(err));
     setMoreOpen(false);
+    setPopIsOpen(false);
+    setPosts(posts.filter((p) => p.uid !== post.uid));
   };
 
   const handleOnClose = (): void => {
@@ -94,10 +106,27 @@ export const PostOverlay = ({
     // TODO: Save input to post.content using setFocusPost and update db
     setMoreOpen(false);
     setEditOpen(false);
+
+    // contentRef.current);
+    setPosts(
+      posts.map((p) => {
+        if (p.uid === post.uid) p.content = contentRef.current;
+        return p;
+      })
+    );
+
+    axios
+      .patch(`${SERVER_URL as string}/posts/${post.uid}`, {
+        username: post.author,
+        content: contentRef.current,
+      })
+      .catch((err) => console.error(err));
   };
 
   const theme = useTheme();
   const ctx = useContext(myContext);
+
+  const contentRef = useRef(post.content);
   const [moreOpen, setMoreOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -205,12 +234,12 @@ export const PostOverlay = ({
               color={theme.palette.secondary.contrastText}
               sx={CONTENT_STYLE}
             >
-              {post.content}
+              {contentRef.current}
             </Typography>
           ) : (
             <TextField
               variant="filled"
-              defaultValue={post.content}
+              defaultValue={contentRef.current}
               multiline
               sx={{
                 ...EDIT_FIELD_STYLE,
@@ -220,6 +249,9 @@ export const PostOverlay = ({
                   ...EDIT_INPUT_STYLE,
                   color: theme.palette.secondary.contrastText,
                 },
+              }}
+              onChange={(e) => {
+                contentRef.current = e.target.value;
               }}
             />
           )}
