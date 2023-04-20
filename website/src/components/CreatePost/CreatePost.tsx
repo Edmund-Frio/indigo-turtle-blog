@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { SERVER_URL } from 'utils/constants';
 
 const CENTER_STYLE = {
   display: 'flex',
@@ -64,7 +65,7 @@ export function CreatePost(): JSX.Element {
     };
 
     axios
-      .post('http://localhost:4000/createposts', post)
+      .post(`${SERVER_URL}/createposts`, post)
       .catch((error) => console.error(error));
     navigate('/postspage');
   };

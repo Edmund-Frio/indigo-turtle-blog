@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Avatar, Box } from '@mui/material';
 
 const IMAGE_STYLE = {
