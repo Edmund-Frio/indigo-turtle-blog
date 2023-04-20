@@ -100,15 +100,22 @@ export const isUserAuthorized = (username: string, post: Post): boolean => {
   return post.author === username;
 };
 
-export const getAllPosts = (callback: (posts: any) => void) => {
+// export const getAllPosts = (callback: (posts: any) => void) => {
+//   const db = getDatabase(dbapp);
+//   const postRef = ref(db, 'posts');
+
+//   const unsub = onValue(postRef, (snapshot) => {
+//     const posts = snapshot.val();
+//     callback(posts);
+//     // unsub();
+//   });
+// };
+
+export const getAllPosts = async (): Promise<Post[]> => {
   const db = getDatabase(dbapp);
   const postRef = ref(db, 'posts');
-
-  const unsub = onValue(postRef, (snapshot) => {
-    const posts = snapshot.val();
-    callback(posts);
-    unsub();
-  });
+  const snapshot = (await get(postRef)).val();
+  return snapshot;
 };
 
 export const updatePostContent = async (
